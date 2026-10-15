@@ -23,7 +23,7 @@ figcaption{font-size:12px;color:#6b6580;margin-top:6px}
 ol.steps{padding:0;margin:0;list-style:none;counter-reset:s}
 ol.steps li{counter-increment:s;position:relative;padding:12px 12px 12px 54px;margin-bottom:10px;background:#fff;border:1px solid #e6e0f3;border-radius:12px}
 ol.steps li:before{content:counter(s);position:absolute;left:12px;top:10px;width:30px;height:30px;border-radius:50%;background:#5b2a9d;color:#fff;font-weight:700;text-align:center;line-height:30px}
-.offer{background:#fff;border:2px solid #5b2a9d;border-radius:16px;padding:20px;text-align:center;margin:24px 0}
+.offer{margin-bottom:14px;background:#fff;border:2px solid #5b2a9d;border-radius:16px;padding:20px;text-align:center;margin:24px 0}
 .offer .big{font-size:22px;font-weight:800;margin:0}
 .offer .price{font-size:34px;font-weight:800;color:#5b2a9d;margin:6px 0 0}
 .offer .or{color:#3b3552;margin:0 0 10px}
@@ -45,11 +45,11 @@ footer a{color:#5b2a9d}
 <p class="sub">Um passo simples para incluir no seu dia, sem complicação e sem gastar tempo.</p>
 
 <figure>
-<img src="img/hidraliso.jpg" width="512" height="512" alt="Embalagens da marca Hidra Liso" fetchpriority="high">
-<figcaption>Imagem do site do fabricante, ilustrativa da marca. Confira a embalagem na página de compra.</figcaption>
+<img src="img/tonico-2x.jpg" width="626" height="626" alt="Dois frascos do Tônico Capilar Hidra Liso, 120 ml" fetchpriority="high">
+<figcaption>Tônico Capilar Hidra Liso, frasco spray de 120 ml.</figcaption>
 </figure>
 
-<a class="btn" href="#" data-buy>QUERO COMPRAR 1 E LEVAR 2</a>
+<a class="btn" href="#oferta">QUERO COMPRAR 1 E LEVAR 2</a>
 
 <h2>Como usar</h2>
 <ol class="steps">
@@ -59,25 +59,34 @@ footer a{color:#5b2a9d}
 </ol>
 <p class="note">Siga sempre as orientações da embalagem.</p>
 
-<h2>Oferta</h2>
+<h2 id="oferta">Escolha seu kit</h2>
 <div class="offer">
 <p class="big">Compre 1, leve 2</p>
-<p class="price">R$ 97</p>
-<p class="or">ou 12x de R$ 9,83</p>
+<p class="price">2 frascos por R$ 127</p>
 <ul class="ok">
 <li>Garantia de 7 dias</li>
 <li>Pagamento em ambiente seguro, direto no checkout</li>
 </ul>
-<a class="btn" href="#" data-buy>QUERO COMPRAR 1 E LEVAR 2</a>
+<a class="btn" href="#" data-buy="2">QUERO 2 FRASCOS — R$ 127</a>
+</div>
+<div class="offer">
+<p class="big">Kit 4 frascos</p>
+<p class="price">R$ 197</p>
+<a class="btn" href="#" data-buy="4">QUERO 4 FRASCOS — R$ 197</a>
+</div>
+<div class="offer">
+<p class="big">Kit 6 frascos</p>
+<p class="price">R$ 247</p>
+<a class="btn" href="#" data-buy="6">QUERO 6 FRASCOS — R$ 247</a>
 </div>
 
 <h2>Perguntas rápidas</h2>
 <details><summary>Como funciona a entrega?</summary><p>O pedido é enviado pelo fabricante. Prazo e rastreio aparecem no checkout e no e-mail da compra.</p></details>
-<details><summary>Quais as formas de pagamento?</summary><p>R$ 97 à vista ou em até 12x de R$ 9,83, conforme as opções do checkout.</p></details>
+<details><summary>Quais as formas de pagamento?</summary><p>Cartão, Pix ou boleto, conforme as opções mostradas no checkout.</p></details>
 <details><summary>Como funciona a garantia?</summary><p>Você tem 7 dias para pedir o cancelamento, conforme as regras mostradas no checkout.</p></details>
 <details><summary>Como usar?</summary><p>Borrife na raiz, massageie por 30 segundos e use na frequência indicada no rótulo.</p></details>
 
-<a class="btn" href="#" data-buy>QUERO COMPRAR 1 E LEVAR 2</a>
+<a class="btn" href="#" data-buy="2">QUERO COMPRAR 1 E LEVAR 2</a>
 <p class="note">Resultados variam de pessoa para pessoa.</p>
 </main>
 <footer>
@@ -85,7 +94,9 @@ footer a{color:#5b2a9d}
 <p><a href="privacidade.html">Privacidade</a> · <a href="termos.html">Termos</a></p>
 </footer>
 <script>
-var AFF_URL = "PENDENTE_LINK_AFILIADO_BRAIP";
+// links de campanha Braip do nosso afiliado, um por plano (2/4/6 frascos); preenchidos quando a afiliacao for aprovada
+var AFF_URL = {"2":"PENDENTE_LINK_AFILIADO_BRAIP","4":"PENDENTE_LINK_AFILIADO_BRAIP","6":"PENDENTE_LINK_AFILIADO_BRAIP"};
+var KIT_VALOR = {"2":127,"4":197,"6":247};
 var PIXEL_ID = "1441557431231612";
 !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
 fbq('init',PIXEL_ID);fbq('track','PageView');
@@ -96,8 +107,8 @@ fbq('init',PIXEL_ID);fbq('track','PageView');
     if(!vc&&h>0&&window.scrollY/h>=0.5){vc=true;fbq('track','ViewContent');window.removeEventListener('scroll',onScroll)}
   }
   window.addEventListener('scroll',onScroll,{passive:true});
-  function dest(){
-    var u=AFF_URL,q=new URLSearchParams(location.search),keep=[];
+  function dest(kit){
+    var u=AFF_URL[kit]||AFF_URL["2"],q=new URLSearchParams(location.search),keep=[];
     q.forEach(function(v,k){if(k.indexOf('utm_')===0||k==='fbclid')keep.push(encodeURIComponent(k)+'='+encodeURIComponent(v))});
     if(!keep.length)return u;
     return u+(u.indexOf('?')>-1?'&':'?')+keep.join('&');
@@ -105,8 +116,9 @@ fbq('init',PIXEL_ID);fbq('track','PageView');
   var b=document.querySelectorAll('[data-buy]');
   for(var i=0;i<b.length;i++)b[i].addEventListener('click',function(e){
     e.preventDefault();
-    var to=dest();
-    fbq('track','InitiateCheckout');
+    var kit=this.getAttribute('data-buy')||"2";
+    var to=dest(kit);
+    fbq('track','InitiateCheckout',{value:KIT_VALOR[kit],currency:'BRL',content_name:'tonico-'+kit});
     setTimeout(function(){location.href=to},180);
   });
 })();
