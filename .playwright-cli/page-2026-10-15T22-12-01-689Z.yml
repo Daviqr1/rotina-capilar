@@ -1,0 +1,54 @@
+- generic [active] [ref=e1]:
+  - main [ref=e2]:
+    - generic [ref=e3]: Tônico Capilar Hidraliso
+    - heading "Uma rotina de 30 segundos para cuidar do couro cabeludo" [level=1] [ref=e4]
+    - paragraph [ref=e5]: Um passo simples para incluir no seu dia, sem complicação e sem gastar tempo.
+    - figure "Tônico Capilar Hidra Liso, frasco spray de 120 ml." [ref=e6]:
+      - img "Dois frascos do Tônico Capilar Hidra Liso, 120 ml" [ref=e7]
+    - link "QUERO COMPRAR 1 E LEVAR 2" [ref=e9] [cursor=pointer]:
+      - /url: "#oferta"
+    - heading "Como usar" [level=2] [ref=e10]
+    - list [ref=e11]:
+      - listitem [ref=e12]: Borrife o tônico na raiz, direto no couro cabeludo.
+      - listitem [ref=e13]: Massageie com as pontas dos dedos por 30 segundos.
+      - listitem [ref=e14]: Repita na frequência indicada, conforme o rótulo.
+    - paragraph [ref=e15]: Siga sempre as orientações da embalagem.
+    - heading "Escolha seu kit" [level=2] [ref=e16]
+    - generic [ref=e17]:
+      - paragraph [ref=e18]: Compre 1, leve 2
+      - paragraph [ref=e19]: 2 frascos por R$ 127
+      - list [ref=e20]:
+        - listitem [ref=e21]: ✓ Garantia de 7 dias
+        - listitem [ref=e22]: ✓ Pagamento em ambiente seguro, direto no checkout
+      - link "QUERO 2 FRASCOS — R$ 127" [ref=e23] [cursor=pointer]:
+        - /url: "#"
+    - generic [ref=e24]:
+      - paragraph [ref=e25]: Kit 4 frascos
+      - paragraph [ref=e26]: R$ 197
+      - link "QUERO 4 FRASCOS — R$ 197" [ref=e27] [cursor=pointer]:
+        - /url: "#"
+    - generic [ref=e28]:
+      - paragraph [ref=e29]: Kit 6 frascos
+      - paragraph [ref=e30]: R$ 247
+      - link "QUERO 6 FRASCOS — R$ 247" [ref=e31] [cursor=pointer]:
+        - /url: "#"
+    - heading "Perguntas rápidas" [level=2] [ref=e32]
+    - group [ref=e33]:
+      - generic "Como funciona a entrega?" [ref=e34] [cursor=pointer]
+    - group [ref=e35]:
+      - generic "Quais as formas de pagamento?" [ref=e36] [cursor=pointer]
+    - group [ref=e37]:
+      - generic "Como funciona a garantia?" [ref=e38] [cursor=pointer]
+    - group [ref=e39]:
+      - generic "Como usar?" [ref=e40] [cursor=pointer]
+    - link "QUERO COMPRAR 1 E LEVAR 2" [ref=e41] [cursor=pointer]:
+      - /url: "#"
+    - paragraph [ref=e42]: Resultados variam de pessoa para pessoa.
+  - contentinfo [ref=e43]:
+    - paragraph [ref=e44]: Este site é de um afiliado independente e não é o site oficial do fabricante. Este site não é afiliado ao Facebook.
+    - paragraph [ref=e45]:
+      - link "Privacidade" [ref=e46] [cursor=pointer]:
+        - /url: privacidade.html
+      - text: ·
+      - link "Termos" [ref=e47] [cursor=pointer]:
+        - /url: termos.html

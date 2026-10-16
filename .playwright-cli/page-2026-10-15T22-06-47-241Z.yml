@@ -1,0 +1,45 @@
+- generic [active] [ref=e1]:
+  - main [ref=e2]:
+    - generic [ref=e3]: Tônico Capilar Hidraliso
+    - heading "Uma rotina de 30 segundos para cuidar do couro cabeludo" [level=1] [ref=e4]
+    - paragraph [ref=e5]: Um passo simples para incluir no seu dia, sem complicação e sem gastar tempo.
+    - figure "Imagem do site do fabricante, ilustrativa da marca. Confira a embalagem na página de compra." [ref=e6]:
+      - img "Embalagens da marca Hidra Liso" [ref=e7]
+    - link "QUERO COMPRAR 1 E LEVAR 2" [ref=e9] [cursor=pointer]:
+      - /url: "#"
+    - heading "Como usar" [level=2] [ref=e10]
+    - list [ref=e11]:
+      - listitem [ref=e12]: Borrife o tônico na raiz, direto no couro cabeludo.
+      - listitem [ref=e13]: Massageie com as pontas dos dedos por 30 segundos.
+      - listitem [ref=e14]: Repita na frequência indicada, conforme o rótulo.
+    - paragraph [ref=e15]: Siga sempre as orientações da embalagem.
+    - heading "Oferta" [level=2] [ref=e16]
+    - generic [ref=e17]:
+      - paragraph [ref=e18]: Compre 1, leve 2
+      - paragraph [ref=e19]: R$ 97
+      - paragraph [ref=e20]: ou 12x de R$ 9,83
+      - list [ref=e21]:
+        - listitem [ref=e22]: ✓ Garantia de 7 dias
+        - listitem [ref=e23]: ✓ Pagamento em ambiente seguro, direto no checkout
+      - link "QUERO COMPRAR 1 E LEVAR 2" [ref=e24] [cursor=pointer]:
+        - /url: "#"
+    - heading "Perguntas rápidas" [level=2] [ref=e25]
+    - group [ref=e26]:
+      - generic "Como funciona a entrega?" [ref=e27] [cursor=pointer]
+    - group [ref=e28]:
+      - generic "Quais as formas de pagamento?" [ref=e29] [cursor=pointer]
+    - group [ref=e30]:
+      - generic "Como funciona a garantia?" [ref=e31] [cursor=pointer]
+    - group [ref=e32]:
+      - generic "Como usar?" [ref=e33] [cursor=pointer]
+    - link "QUERO COMPRAR 1 E LEVAR 2" [ref=e34] [cursor=pointer]:
+      - /url: "#"
+    - paragraph [ref=e35]: Resultados variam de pessoa para pessoa.
+  - contentinfo [ref=e36]:
+    - paragraph [ref=e37]: Este site é de um afiliado independente e não é o site oficial do fabricante. Este site não é afiliado ao Facebook.
+    - paragraph [ref=e38]:
+      - link "Privacidade" [ref=e39] [cursor=pointer]:
+        - /url: privacidade.html
+      - text: ·
+      - link "Termos" [ref=e40] [cursor=pointer]:
+        - /url: termos.html
