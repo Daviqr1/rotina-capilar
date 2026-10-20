@@ -1128,13 +1128,22 @@
   </div>
 <script>
 (function(){
-  var V={"2":127,"4":197,"6":247},vc=false;
-  window.addEventListener('scroll',function(){var d=document.documentElement,h=d.scrollHeight-innerHeight;if(!vc&&h>0&&scrollY/h>=.5){vc=true;window.fbq&&fbq('track','ViewContent')}},{passive:true});
+  var V={"2":127,"4":197,"6":247},vc=false,T0=Date.now(),fd={};
+  // funil fino no pixel: ate onde le, quanto tempo fica, qual botao, se voltou do checkout
+  function ev(n,p){if(fd[n])return;fd[n]=1;window.fbq&&fbq('trackCustom',n,p||{})}
+  try{var sc=JSON.parse(sessionStorage.getItem('chk')||'null');if(sc){sessionStorage.removeItem('chk');ev('VoltouDoCheckout',{kit:sc.k,segundos_fora:Math.round((Date.now()-sc.t)/1000)})}}catch(_){/* sessionStorage bloqueado: segue sem o sinal */}
+  window.addEventListener('pageshow',function(e){if(e.persisted&&fd.Clicou){fd.VoltouDoCheckout=0;ev('VoltouDoCheckout',{})}});
+  [15,45,90].forEach(function(s){setTimeout(function(){if(!document.hidden)ev('Tempo'+s+'s')},s*1000)});
+  window.addEventListener('scroll',function(){var d=document.documentElement,h=d.scrollHeight-innerHeight;if(h<=0)return;var p=scrollY/h;if(!vc&&p>=.5){vc=true;window.fbq&&fbq('track','ViewContent')}
+    if(p>=.25)ev('Rolou25');if(p>=.75)ev('Rolou75');if(p>=.95)ev('Rolou100')},{passive:true});
   document.addEventListener('click',function(e){
     var a=e.target.closest&&e.target.closest('a[data-checkout]');if(!a)return;
     e.preventDefault();var k=a.getAttribute('data-checkout'),u=a.href,q=new URLSearchParams(location.search),keep=[];
     q.forEach(function(v,n){if(n.indexOf('utm_')===0||n==='fbclid')keep.push(encodeURIComponent(n)+'='+encodeURIComponent(v))});
     if(keep.length)u+=(u.indexOf('?')>-1?'&':'?')+keep.join('&');
+    var all=[].slice.call(document.querySelectorAll('a[data-checkout]')),o=a.closest('.mobile-checkout')?'fixo':'cta'+(all.indexOf(a)+1);
+    fd.Clicou=1;ev('Clique_'+o,{kit:k,segundos_na_pagina:Math.round((Date.now()-T0)/1000)});
+    try{sessionStorage.setItem('chk',JSON.stringify({k:k,t:Date.now()}))}catch(_){/* sem sessionStorage: perde so o VoltouDoCheckout */}
     window.fbq&&fbq('track','InitiateCheckout',{value:V[k]||127,currency:'BRL',content_name:'tonico-'+k});
     setTimeout(function(){location.href=u},180);
   },true);
