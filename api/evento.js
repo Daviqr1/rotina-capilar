@@ -3,6 +3,10 @@
 const PIXEL = '1441557431231612';
 const PERMITIDOS = new Set(['PageView', 'ViewContent', 'InitiateCheckout', 'Rolou25', 'Rolou75', 'Rolou100',
   'Tempo15s', 'Tempo45s', 'Tempo90s', 'VoltouDoCheckout']);
+// o endpoint e publico: so aceita chamada vinda do proprio dominio e nao confia em valor vindo do cliente
+const HOSTS = new Set(['minharotinacapilar.com', 'www.minharotinacapilar.com']);
+const PRECO = { '2': 127, '4': 197, '6': 247 };
+const host = (u) => { try { return new URL(u).hostname; } catch { return ''; } };
 
 function cookie(req, nome) {
   const m = (req.headers.cookie || '').match(new RegExp('(?:^|; )' + nome + '=([^;]+)'));
@@ -16,20 +20,27 @@ module.exports = async (req, res) => {
   if (typeof b === 'string') { try { b = JSON.parse(b); } catch { b = null; } }
   const nome = b && String(b.n || '');
   if (!b || !(PERMITIDOS.has(nome) || /^Clique_(fixo|cta\d{1,2})$/.test(nome))) return res.status(400).end();
+  const id = String(b.id || '');
+  if (!id.startsWith(nome + '.') || !/^[a-z0-9]{6,24}$/.test(id.slice(nome.length + 1))) return res.status(400).end();
+  const origem = host(req.headers.origin || req.headers.referer || '');
+  if (!HOSTS.has(origem) || !HOSTS.has(host(String(b.u || '')))) return res.status(403).end();
   if (!token) return res.status(204).end();
 
-  let url = '';
-  try { url = new URL(String(b.u || '')).href; } catch { url = 'https://minharotinacapilar.com/'; }
+  const url = new URL(String(b.u)).href;
   const fbclid = new URL(url).searchParams.get('fbclid');
   const fbc = cookie(req, '_fbc') || (fbclid ? `fb.1.${Date.now()}.${fbclid}` : undefined);
   const ip = String(req.headers['x-forwarded-for'] || '').split(',')[0].trim() || undefined;
+  const d = b.d || {};
+  const kit = PRECO[String(d.kit || '')] ? String(d.kit) : (/^tonico-(2|4|6)$/.test(String(d.content_name || '')) ? String(d.content_name).slice(7) : undefined);
   const custom = {};
-  for (const [k, v] of Object.entries(b.d || {})) if (typeof v === 'string' || typeof v === 'number') custom[k] = v;
+  if (kit) custom.kit = kit;
+  if (nome === 'InitiateCheckout') Object.assign(custom, { value: PRECO[kit || '2'], currency: 'BRL', content_name: 'tonico-' + (kit || '2') });
+  for (const k of ['segundos_na_pagina', 'segundos_fora']) if (Number.isFinite(d[k])) custom[k] = Math.max(0, Math.min(86400, Math.round(d[k])));
 
   const evento = {
     event_name: nome,
     event_time: Math.floor(Date.now() / 1000),
-    event_id: String(b.id || '').slice(0, 64),
+    event_id: id,
     event_source_url: url,
     action_source: 'website',
     user_data: { client_ip_address: ip, client_user_agent: req.headers['user-agent'], fbp: cookie(req, '_fbp'), fbc },
