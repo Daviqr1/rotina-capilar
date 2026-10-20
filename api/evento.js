@@ -8,6 +8,9 @@ const HOSTS = new Set(['minharotinacapilar.com', 'www.minharotinacapilar.com']);
 const PRECO = { '2': 127, '4': 197, '6': 247 };
 const host = (u) => { try { return new URL(u).hostname; } catch { return ''; } };
 
+// beacon vindo de outro dominio nao leva cookie: a pagina manda _fbp/_fbc no corpo, e so passa o formato fb.N.tempo.id
+const fbCookie = (v) => (typeof v === 'string' && /^fb\.\d\.\d{10,13}\.[\w.-]{1,200}$/.test(v) ? v : undefined);
+
 function cookie(req, nome) {
   const m = (req.headers.cookie || '').match(new RegExp('(?:^|; )' + nome + '=([^;]+)'));
   return m ? decodeURIComponent(m[1]) : undefined;
@@ -28,7 +31,7 @@ module.exports = async (req, res) => {
 
   const url = new URL(String(b.u)).href;
   const fbclid = new URL(url).searchParams.get('fbclid');
-  const fbc = cookie(req, '_fbc') || (fbclid ? `fb.1.${Date.now()}.${fbclid}` : undefined);
+  const fbc = cookie(req, '_fbc') || fbCookie(b.fbc) || (fbclid ? `fb.1.${Date.now()}.${fbclid}` : undefined);
   const ip = String(req.headers['x-forwarded-for'] || '').split(',')[0].trim() || undefined;
   const d = b.d || {};
   const kit = PRECO[String(d.kit || '')] ? String(d.kit) : (/^tonico-(2|4|6)$/.test(String(d.content_name || '')) ? String(d.content_name).slice(7) : undefined);
@@ -43,7 +46,7 @@ module.exports = async (req, res) => {
     event_id: id,
     event_source_url: url,
     action_source: 'website',
-    user_data: { client_ip_address: ip, client_user_agent: req.headers['user-agent'], fbp: cookie(req, '_fbp'), fbc },
+    user_data: { client_ip_address: ip, client_user_agent: req.headers['user-agent'], fbp: cookie(req, '_fbp') || fbCookie(b.fbp), fbc },
     custom_data: custom,
   };
   try {
