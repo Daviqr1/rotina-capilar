@@ -1,0 +1,5 @@
+{
+  "name": "rotina-capilar",
+  "private": true,
+  "engines": { "node": "22.x" }
+}
