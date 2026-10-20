@@ -5,6 +5,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#6f1695">
+  <link rel="preconnect" href="https://ev.braip.com">
+  <link rel="dns-prefetch" href="https://ev.braip.com">
   <title>Tônico Capilar Hidraliso | Compre 1 e Leve 2</title>
   <!-- ============================================
        ESPAÇO PARA O PIXEL DO FACEBOOK (META)
@@ -23,7 +25,11 @@
     'https://connect.facebook.net/en_US/fbevents.js');
 
     fbq('init', '1441557431231612');
-    fbq('track', 'PageView');
+    // mesmo eventID no navegador e no servidor (/api/evento): o Meta desduplica e a cobertura da API de Conversoes sobe
+    window.metaEv=function(t,n,d){var id=n+'.'+Date.now().toString(36)+Math.random().toString(36).slice(2,8);d=d||{};
+      fbq(t,n,d,{eventID:id});
+      try{navigator.sendBeacon&&navigator.sendBeacon('/api/evento',new Blob([JSON.stringify({t:t,n:n,id:id,d:d,u:location.href})],{type:'application/json'}))}catch(_){/* sem beacon: fica so o pixel do navegador */}};
+    metaEv('track', 'PageView');
   </script>
   <noscript>
     <img height="1" width="1" style="display:none"
@@ -749,7 +755,12 @@
       backdrop-filter: blur(12px);
       box-shadow: 0 -12px 34px rgba(53,16,68,0.12);
     }
-    .mobile-checkout .btn { min-height: 52px; }
+    .mobile-checkout .btn { min-height: 52px; flex: 1; }
+    .mobile-checkout { gap: 12px; align-items: center; }
+    .mc-price { display: flex; flex-direction: column; line-height: 1.15; white-space: nowrap; }
+    .mc-price strong { font-size: 1.25rem; color: var(--ink); }
+    .mc-price span { font-size: 0.74rem; color: var(--muted); }
+    .next-step { margin-top: 14px; font-size: 0.86rem; line-height: 1.4; color: var(--muted); max-width: 460px; }
 
     @media (max-width: 980px) {
       .hero-grid { grid-template-columns: 1fr; gap: 46px; padding-block: 58px 72px; }
@@ -818,7 +829,7 @@
       .cred-card strong { font-size: 0.85rem; }
       .cred-card span { font-size: 0.74rem; }
       .final-cta { padding-block: 76px; }
-      .mobile-checkout { display: block; }
+      .mobile-checkout { display: flex; }
       footer { padding-bottom: 40px; }
     }
 
@@ -863,6 +874,7 @@
             <a class="btn btn--large" href="https://ev.braip.com/campanhas/cpa/camk75y5o" data-checkout="2">QUERO COMPRAR 1 E LEVAR 2 <span class="btn-arrow" aria-hidden="true">→</span></a>
             <div class="hero-price-note"><strong>R$ 127</strong>kit com 2 tônicos, no cartão ou Pix</div>
           </div>
+          <p class="next-step"><span aria-hidden="true">🔒</span> Próxima tela: checkout seguro da Braip. Você informa nome, e-mail e celular, depois o CEP, e escolhe Pix ou cartão.</p>
         </div>
 
         <div class="hero-visual" aria-label="Oferta do Tônico Capilar Hidraliso">
@@ -878,7 +890,7 @@
     <div class="trust-row">
       <div class="container trust-grid">
         <div class="trust-item"><span class="trust-icon" aria-hidden="true">30</span><div><strong>30 dias de garantia</strong><span>Ou seu dinheiro de volta</span></div></div>
-        <div class="trust-item"><span class="trust-icon" aria-hidden="true">MP</span><div><strong>Mercado Pago</strong><span>Pagamento protegido</span></div></div>
+        <div class="trust-item"><span class="trust-icon" aria-hidden="true">🔒</span><div><strong>Checkout Braip</strong><span>Pagamento protegido</span></div></div>
         <div class="trust-item"><span class="trust-icon" aria-hidden="true">+10</span><div><strong>Mais de 10 anos</strong><span>Marca consolidada</span></div></div>
         <div class="trust-item"><span class="trust-icon" aria-hidden="true">WA</span><div><strong>Suporte WhatsApp</strong><span>Rastreio do pedido</span></div></div>
       </div>
@@ -1004,7 +1016,7 @@
         <div class="offer-head">
           <span class="section-kicker">Escolha a melhor oferta para você</span>
           <h2>Quanto maior o kit, <span class="accent">maior a economia.</span></h2>
-          <p class="section-copy">Selecione abaixo a quantidade desejada. Cada botão abre diretamente o checkout correto da Monetizze.</p>
+          <p class="section-copy">Selecione abaixo a quantidade desejada. Cada botão abre o checkout seguro da Braip, onde você paga no Pix ou no cartão.</p>
         </div>
 
         <div class="offer-grid">
@@ -1099,12 +1111,12 @@
           <p class="section-copy" style="margin-inline: auto;">Uma estrutura completa para você comprar com confiança, acompanhar seu pedido e falar com nossa equipe quando precisar.</p>
         </div>
         <div class="credibility-grid">
-          <article class="cred-card"><img src="img/oficial/MP_RGB_HANDSHAKE_color_horizontal.png" alt="Mercado Pago" loading="lazy"><strong>Pagamento processado por Mercado Pago</strong><span>Ambiente protegido durante a compra.</span></article>
+          <article class="cred-card"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#6f1695" stroke-width="2" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><strong>Checkout seguro da Braip</strong><span>Plataforma de pagamentos com cadeado SSL, Pix ou cartão.</span></article>
           <article class="cred-card"><img class="social-logo" src="img/oficial/whatsapp.jpg" alt="WhatsApp" loading="lazy"><strong>Rastreio e suporte pelo WhatsApp</strong><span>Canal direto para informações do pedido.</span></article>
           <article class="cred-card"><img src="img/oficial/LOGO2-2.png" alt="Hidraliso" loading="lazy"><strong>Hidraliso: mais de 10 anos no mercado</strong><span>Marca consolidada no segmento da beleza.</span></article>
           <a class="cred-card" href="https://www.instagram.com/hidraliso/" target="_blank" rel="noopener noreferrer"><img class="social-logo" src="img/oficial/instagram.jpg" alt="Instagram" loading="lazy"><strong>Mais de 58 mil seguidores</strong><span>@hidraliso • perfil oficial da marca.</span></a>
         </div>
-        <div class="cred-proof"><strong>Você não está comprando de uma página desconhecida.</strong> A Hidraliso possui presença oficial, suporte ao cliente e pagamentos processados pelo Mercado Pago.</div>
+        <div class="cred-proof"><strong>Você não está comprando de uma página desconhecida.</strong> A Hidraliso possui presença oficial e suporte ao cliente, e o pagamento é processado pela Braip, em ambiente protegido.</div>
       </div>
     </section>
 
@@ -1124,17 +1136,18 @@
   </footer>
 
   <div class="mobile-checkout" aria-label="Atalho para compra">
-    <a class="btn btn--full" href="https://ev.braip.com/campanhas/cpa/camk75y5o" data-checkout="2">COMPRAR 1 E LEVAR 2 <span class="btn-arrow" aria-hidden="true">→</span></a>
+    <div class="mc-price"><strong>R$ 127</strong><span>2 tônicos · Pix ou cartão</span></div>
+    <a class="btn" href="https://ev.braip.com/campanhas/cpa/camk75y5o" data-checkout="2">COMPRAR <span class="btn-arrow" aria-hidden="true">→</span></a>
   </div>
 <script>
 (function(){
   var V={"2":127,"4":197,"6":247},vc=false,T0=Date.now(),fd={};
   // funil fino no pixel: ate onde le, quanto tempo fica, qual botao, se voltou do checkout
-  function ev(n,p){if(fd[n])return;fd[n]=1;window.fbq&&fbq('trackCustom',n,p||{})}
+  function ev(n,p){if(fd[n])return;fd[n]=1;window.metaEv&&metaEv('trackCustom',n,p||{})}
   try{var sc=JSON.parse(sessionStorage.getItem('chk')||'null');if(sc){sessionStorage.removeItem('chk');ev('VoltouDoCheckout',{kit:sc.k,segundos_fora:Math.round((Date.now()-sc.t)/1000)})}}catch(_){/* sessionStorage bloqueado: segue sem o sinal */}
   window.addEventListener('pageshow',function(e){if(e.persisted&&fd.Clicou){fd.VoltouDoCheckout=0;ev('VoltouDoCheckout',{})}});
   [15,45,90].forEach(function(s){setTimeout(function(){if(!document.hidden)ev('Tempo'+s+'s')},s*1000)});
-  window.addEventListener('scroll',function(){var d=document.documentElement,h=d.scrollHeight-innerHeight;if(h<=0)return;var p=scrollY/h;if(!vc&&p>=.5){vc=true;window.fbq&&fbq('track','ViewContent')}
+  window.addEventListener('scroll',function(){var d=document.documentElement,h=d.scrollHeight-innerHeight;if(h<=0)return;var p=scrollY/h;if(!vc&&p>=.5){vc=true;window.metaEv&&metaEv('track','ViewContent')}
     if(p>=.25)ev('Rolou25');if(p>=.75)ev('Rolou75');if(p>=.95)ev('Rolou100')},{passive:true});
   document.addEventListener('click',function(e){
     var a=e.target.closest&&e.target.closest('a[data-checkout]');if(!a)return;
@@ -1144,7 +1157,7 @@
     var all=[].slice.call(document.querySelectorAll('a[data-checkout]')),o=a.closest('.mobile-checkout')?'fixo':'cta'+(all.indexOf(a)+1);
     fd.Clicou=1;ev('Clique_'+o,{kit:k,segundos_na_pagina:Math.round((Date.now()-T0)/1000)});
     try{sessionStorage.setItem('chk',JSON.stringify({k:k,t:Date.now()}))}catch(_){/* sem sessionStorage: perde so o VoltouDoCheckout */}
-    window.fbq&&fbq('track','InitiateCheckout',{value:V[k]||127,currency:'BRL',content_name:'tonico-'+k});
+    window.metaEv&&metaEv('track','InitiateCheckout',{value:V[k]||127,currency:'BRL',content_name:'tonico-'+k});
     setTimeout(function(){location.href=u},180);
   },true);
 })();
